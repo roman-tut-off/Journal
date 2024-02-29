@@ -1,0 +1,686 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище NestorJournalModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DayWeek">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DayWeekShedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayWeekID" Type="int" Nullable="false" />
+          <Property Name="SheduleID" Type="int" Nullable="false" />
+          <Property Name="lesson" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarkTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Student" Type="int" Nullable="false" />
+          <Property Name="id_Trainer" Type="int" Nullable="false" />
+          <Property Name="id_Study" Type="int" Nullable="false" />
+          <Property Name="date_mark" Type="date" Nullable="false" />
+          <Property Name="id_mark" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_Group" Type="int" Nullable="false" />
+          <Property Name="id_Trainer" Type="int" Nullable="false" />
+          <Property Name="id_Study" Type="int" Nullable="false" />
+          <Property Name="DateStart" Type="date" Nullable="false" />
+          <Property Name="DateEnd" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="secondname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="thirdname" Type="varchar" MaxLength="50" />
+          <Property Name="groupsID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Study">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="secondname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="thirdname" Type="varchar" MaxLength="50" />
+          <Property Name="log_in" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pass_word" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__DayWeekSh__DayWe__5CD6CB2B">
+          <End Role="DayWeek" Type="Self.DayWeek" Multiplicity="1" />
+          <End Role="DayWeekShedule" Type="Self.DayWeekShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DayWeek">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DayWeekShedule">
+              <PropertyRef Name="DayWeekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DayWeekSh__Shedu__5DCAEF64">
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="1" />
+          <End Role="DayWeekShedule" Type="Self.DayWeekShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shedule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DayWeekShedule">
+              <PropertyRef Name="SheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarkTable__id_St__48CFD27E">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="MarkTable" Type="Self.MarkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MarkTable">
+              <PropertyRef Name="id_Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarkTable__id_St__4AB81AF0">
+          <End Role="Study" Type="Self.Study" Multiplicity="1" />
+          <End Role="MarkTable" Type="Self.MarkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MarkTable">
+              <PropertyRef Name="id_Study" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarkTable__id_Tr__49C3F6B7">
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="1" />
+          <End Role="MarkTable" Type="Self.MarkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MarkTable">
+              <PropertyRef Name="id_Trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shedule__id_Grou__4222D4EF">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shedule">
+              <PropertyRef Name="id_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shedule__id_Stud__440B1D61">
+          <End Role="Study" Type="Self.Study" Multiplicity="1" />
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shedule">
+              <PropertyRef Name="id_Study" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shedule__id_Trai__4316F928">
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="1" />
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shedule">
+              <PropertyRef Name="id_Trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarkTable_Marks">
+          <End Role="Marks" Type="Self.Marks" Multiplicity="1" />
+          <End Role="MarkTable" Type="Self.MarkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MarkTable">
+              <PropertyRef Name="id_mark" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="groupsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище NestorJournalModelContainer">
+          <EntitySet Name="DayWeek" EntityType="Self.DayWeek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DayWeekShedule" EntityType="Self.DayWeekShedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marks" EntityType="Self.Marks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarkTable" EntityType="Self.MarkTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shedule" EntityType="Self.Shedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Study" EntityType="Self.Study" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainer" EntityType="Self.Trainer" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DayWeekSh__DayWe__5CD6CB2B" Association="Self.FK__DayWeekSh__DayWe__5CD6CB2B">
+            <End Role="DayWeek" EntitySet="DayWeek" />
+            <End Role="DayWeekShedule" EntitySet="DayWeekShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DayWeekSh__Shedu__5DCAEF64" Association="Self.FK__DayWeekSh__Shedu__5DCAEF64">
+            <End Role="Shedule" EntitySet="Shedule" />
+            <End Role="DayWeekShedule" EntitySet="DayWeekShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarkTable__id_St__48CFD27E" Association="Self.FK__MarkTable__id_St__48CFD27E">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="MarkTable" EntitySet="MarkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarkTable__id_St__4AB81AF0" Association="Self.FK__MarkTable__id_St__4AB81AF0">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="MarkTable" EntitySet="MarkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarkTable__id_Tr__49C3F6B7" Association="Self.FK__MarkTable__id_Tr__49C3F6B7">
+            <End Role="Trainer" EntitySet="Trainer" />
+            <End Role="MarkTable" EntitySet="MarkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shedule__id_Grou__4222D4EF" Association="Self.FK__Shedule__id_Grou__4222D4EF">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Shedule" EntitySet="Shedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shedule__id_Stud__440B1D61" Association="Self.FK__Shedule__id_Stud__440B1D61">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="Shedule" EntitySet="Shedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shedule__id_Trai__4316F928" Association="Self.FK__Shedule__id_Trai__4316F928">
+            <End Role="Trainer" EntitySet="Trainer" />
+            <End Role="Shedule" EntitySet="Shedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarkTable_Marks" Association="Self.FK_MarkTable_Marks">
+            <End Role="Marks" EntitySet="Marks" />
+            <End Role="MarkTable" EntitySet="MarkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="Self.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NestorJournalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DayWeek">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DayWeekShedule" Relationship="Self.FK__DayWeekSh__DayWe__5CD6CB2B" FromRole="DayWeek" ToRole="DayWeekShedule" />
+        </EntityType>
+        <EntityType Name="DayWeekShedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DayWeekID" Type="Int32" Nullable="false" />
+          <Property Name="SheduleID" Type="Int32" Nullable="false" />
+          <Property Name="lesson" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DayWeek" Relationship="Self.FK__DayWeekSh__DayWe__5CD6CB2B" FromRole="DayWeekShedule" ToRole="DayWeek" />
+          <NavigationProperty Name="Shedule" Relationship="Self.FK__DayWeekSh__Shedu__5DCAEF64" FromRole="DayWeekShedule" ToRole="Shedule" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Shedule" Relationship="Self.FK__Shedule__id_Grou__4222D4EF" FromRole="Groups" ToRole="Shedule" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Students_Groups" FromRole="Groups" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Marks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MarkTable" Relationship="Self.FK_MarkTable_Marks" FromRole="Marks" ToRole="MarkTable" />
+        </EntityType>
+        <EntityType Name="MarkTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Student" Type="Int32" Nullable="false" />
+          <Property Name="id_Trainer" Type="Int32" Nullable="false" />
+          <Property Name="id_Study" Type="Int32" Nullable="false" />
+          <Property Name="date_mark" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_mark" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Marks" Relationship="Self.FK_MarkTable_Marks" FromRole="MarkTable" ToRole="Marks" />
+          <NavigationProperty Name="Students" Relationship="Self.FK__MarkTable__id_St__48CFD27E" FromRole="MarkTable" ToRole="Students" />
+          <NavigationProperty Name="Study" Relationship="Self.FK__MarkTable__id_St__4AB81AF0" FromRole="MarkTable" ToRole="Study" />
+          <NavigationProperty Name="Trainer" Relationship="Self.FK__MarkTable__id_Tr__49C3F6B7" FromRole="MarkTable" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="Shedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Group" Type="Int32" Nullable="false" />
+          <Property Name="id_Trainer" Type="Int32" Nullable="false" />
+          <Property Name="id_Study" Type="Int32" Nullable="false" />
+          <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="DayWeekShedule" Relationship="Self.FK__DayWeekSh__Shedu__5DCAEF64" FromRole="Shedule" ToRole="DayWeekShedule" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK__Shedule__id_Grou__4222D4EF" FromRole="Shedule" ToRole="Groups" />
+          <NavigationProperty Name="Study" Relationship="Self.FK__Shedule__id_Stud__440B1D61" FromRole="Shedule" ToRole="Study" />
+          <NavigationProperty Name="Trainer" Relationship="Self.FK__Shedule__id_Trai__4316F928" FromRole="Shedule" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secondname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="thirdname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="groupsID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Students_Groups" FromRole="Students" ToRole="Groups" />
+          <NavigationProperty Name="MarkTable" Relationship="Self.FK__MarkTable__id_St__48CFD27E" FromRole="Students" ToRole="MarkTable" />
+        </EntityType>
+        <EntityType Name="Study">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MarkTable" Relationship="Self.FK__MarkTable__id_St__4AB81AF0" FromRole="Study" ToRole="MarkTable" />
+          <NavigationProperty Name="Shedule" Relationship="Self.FK__Shedule__id_Stud__440B1D61" FromRole="Study" ToRole="Shedule" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="secondname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="thirdname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="log_in" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass_word" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MarkTable" Relationship="Self.FK__MarkTable__id_Tr__49C3F6B7" FromRole="Trainer" ToRole="MarkTable" />
+          <NavigationProperty Name="Shedule" Relationship="Self.FK__Shedule__id_Trai__4316F928" FromRole="Trainer" ToRole="Shedule" />
+        </EntityType>
+        <Association Name="FK__DayWeekSh__DayWe__5CD6CB2B">
+          <End Role="DayWeek" Type="Self.DayWeek" Multiplicity="1" />
+          <End Role="DayWeekShedule" Type="Self.DayWeekShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DayWeek">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DayWeekShedule">
+              <PropertyRef Name="DayWeekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DayWeekSh__Shedu__5DCAEF64">
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="1" />
+          <End Role="DayWeekShedule" Type="Self.DayWeekShedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shedule">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DayWeekShedule">
+              <PropertyRef Name="SheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shedule__id_Grou__4222D4EF">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shedule">
+              <PropertyRef Name="id_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Students_Groups">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="groupsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarkTable_Marks">
+          <End Role="Marks" Type="Self.Marks" Multiplicity="1" />
+          <End Role="MarkTable" Type="Self.MarkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MarkTable">
+              <PropertyRef Name="id_mark" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarkTable__id_St__48CFD27E">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="MarkTable" Type="Self.MarkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MarkTable">
+              <PropertyRef Name="id_Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarkTable__id_St__4AB81AF0">
+          <End Role="Study" Type="Self.Study" Multiplicity="1" />
+          <End Role="MarkTable" Type="Self.MarkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MarkTable">
+              <PropertyRef Name="id_Study" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MarkTable__id_Tr__49C3F6B7">
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="1" />
+          <End Role="MarkTable" Type="Self.MarkTable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MarkTable">
+              <PropertyRef Name="id_Trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shedule__id_Stud__440B1D61">
+          <End Role="Study" Type="Self.Study" Multiplicity="1" />
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Study">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shedule">
+              <PropertyRef Name="id_Study" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Shedule__id_Trai__4316F928">
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="1" />
+          <End Role="Shedule" Type="Self.Shedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Shedule">
+              <PropertyRef Name="id_Trainer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NestorJournalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DayWeek" EntityType="Self.DayWeek" />
+          <EntitySet Name="DayWeekShedule" EntityType="Self.DayWeekShedule" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" />
+          <EntitySet Name="Marks" EntityType="Self.Marks" />
+          <EntitySet Name="MarkTable" EntityType="Self.MarkTable" />
+          <EntitySet Name="Shedule" EntityType="Self.Shedule" />
+          <EntitySet Name="Students" EntityType="Self.Students" />
+          <EntitySet Name="Study" EntityType="Self.Study" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Trainer" EntityType="Self.Trainer" />
+          <AssociationSet Name="FK__DayWeekSh__DayWe__5CD6CB2B" Association="Self.FK__DayWeekSh__DayWe__5CD6CB2B">
+            <End Role="DayWeek" EntitySet="DayWeek" />
+            <End Role="DayWeekShedule" EntitySet="DayWeekShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DayWeekSh__Shedu__5DCAEF64" Association="Self.FK__DayWeekSh__Shedu__5DCAEF64">
+            <End Role="Shedule" EntitySet="Shedule" />
+            <End Role="DayWeekShedule" EntitySet="DayWeekShedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shedule__id_Grou__4222D4EF" Association="Self.FK__Shedule__id_Grou__4222D4EF">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Shedule" EntitySet="Shedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Students_Groups" Association="Self.FK_Students_Groups">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarkTable_Marks" Association="Self.FK_MarkTable_Marks">
+            <End Role="Marks" EntitySet="Marks" />
+            <End Role="MarkTable" EntitySet="MarkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarkTable__id_St__48CFD27E" Association="Self.FK__MarkTable__id_St__48CFD27E">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="MarkTable" EntitySet="MarkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarkTable__id_St__4AB81AF0" Association="Self.FK__MarkTable__id_St__4AB81AF0">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="MarkTable" EntitySet="MarkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MarkTable__id_Tr__49C3F6B7" Association="Self.FK__MarkTable__id_Tr__49C3F6B7">
+            <End Role="Trainer" EntitySet="Trainer" />
+            <End Role="MarkTable" EntitySet="MarkTable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shedule__id_Stud__440B1D61" Association="Self.FK__Shedule__id_Stud__440B1D61">
+            <End Role="Study" EntitySet="Study" />
+            <End Role="Shedule" EntitySet="Shedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Shedule__id_Trai__4316F928" Association="Self.FK__Shedule__id_Trai__4316F928">
+            <End Role="Trainer" EntitySet="Trainer" />
+            <End Role="Shedule" EntitySet="Shedule" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище NestorJournalModelContainer" CdmEntityContainer="NestorJournalEntities">
+          <EntitySetMapping Name="DayWeek">
+            <EntityTypeMapping TypeName="NestorJournalModel.DayWeek">
+              <MappingFragment StoreEntitySet="DayWeek">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DayWeekShedule">
+            <EntityTypeMapping TypeName="NestorJournalModel.DayWeekShedule">
+              <MappingFragment StoreEntitySet="DayWeekShedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DayWeekID" ColumnName="DayWeekID" />
+                <ScalarProperty Name="SheduleID" ColumnName="SheduleID" />
+                <ScalarProperty Name="lesson" ColumnName="lesson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="NestorJournalModel.Groups">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marks">
+            <EntityTypeMapping TypeName="NestorJournalModel.Marks">
+              <MappingFragment StoreEntitySet="Marks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarkTable">
+            <EntityTypeMapping TypeName="NestorJournalModel.MarkTable">
+              <MappingFragment StoreEntitySet="MarkTable">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Student" ColumnName="id_Student" />
+                <ScalarProperty Name="id_Trainer" ColumnName="id_Trainer" />
+                <ScalarProperty Name="id_Study" ColumnName="id_Study" />
+                <ScalarProperty Name="date_mark" ColumnName="date_mark" />
+                <ScalarProperty Name="id_mark" ColumnName="id_mark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shedule">
+            <EntityTypeMapping TypeName="NestorJournalModel.Shedule">
+              <MappingFragment StoreEntitySet="Shedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_Group" ColumnName="id_Group" />
+                <ScalarProperty Name="id_Trainer" ColumnName="id_Trainer" />
+                <ScalarProperty Name="id_Study" ColumnName="id_Study" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="NestorJournalModel.Students">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="secondname" ColumnName="secondname" />
+                <ScalarProperty Name="thirdname" ColumnName="thirdname" />
+                <ScalarProperty Name="groupsID" ColumnName="groupsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Study">
+            <EntityTypeMapping TypeName="NestorJournalModel.Study">
+              <MappingFragment StoreEntitySet="Study">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="NestorJournalModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainer">
+            <EntityTypeMapping TypeName="NestorJournalModel.Trainer">
+              <MappingFragment StoreEntitySet="Trainer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="secondname" ColumnName="secondname" />
+                <ScalarProperty Name="thirdname" ColumnName="thirdname" />
+                <ScalarProperty Name="log_in" ColumnName="log_in" />
+                <ScalarProperty Name="pass_word" ColumnName="pass_word" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

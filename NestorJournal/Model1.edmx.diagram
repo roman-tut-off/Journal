@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e2788052a07848ae8ab812a9ccd553e8" Name="Diagram1">
+        <EntityTypeShape EntityType="NestorJournalModel.DayWeek" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.DayWeekShedule" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.Groups" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.Marks" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.MarkTable" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.Shedule" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.Students" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.Study" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NestorJournalModel.Trainer" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="NestorJournalModel.FK__DayWeekSh__DayWe__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK__DayWeekSh__Shedu__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK__Shedule__id_Grou__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK_Students_Groups" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK_MarkTable_Marks" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK__MarkTable__id_St__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK__MarkTable__id_St__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK__MarkTable__id_Tr__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK__Shedule__id_Stud__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="NestorJournalModel.FK__Shedule__id_Trai__4316F928" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
